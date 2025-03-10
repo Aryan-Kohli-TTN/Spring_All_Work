@@ -1,9 +1,9 @@
 package com.example.Restful_api_assignments.Controller;
 
 import com.example.Restful_api_assignments.Entity.Employee;
+import com.example.Restful_api_assignments.DTO.EmployeeDTO;
 import com.example.Restful_api_assignments.Entity.Employee_2;
 import com.example.Restful_api_assignments.Exceptions.UserNotFoundException;
-import com.example.Restful_api_assignments.Repository.EmployeeRepository;
 import com.example.Restful_api_assignments.Service.EmployeeService;
 import com.example.Restful_api_assignments.Service.EmployeeService_2;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
@@ -11,14 +11,13 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +54,7 @@ public class EmployeeController {
 
 
     @Operation(summary = "Get all Employees", description = "Returns the list of all the Employees")
-    @GetMapping("employees")
+    @GetMapping("/employees")
     public ResponseEntity<List<Employee>> getAllEmployees(){
         List<Employee> employees = employeeService.getAllEmployee();
         return new ResponseEntity<>(employees, HttpStatus.OK);
@@ -104,7 +103,9 @@ public class EmployeeController {
         if(employee==null)
             throw new UserNotFoundException("User not found with id "+id);
         WebMvcLinkBuilder link = linkTo(methodOn(this.getClass()).getAllEmployees());
+        WebMvcLinkBuilder link2 = linkTo(methodOn(this.getClass()).getAllEmployeesV2());
         entityModel.add(link.withRel("all-users"));
+        entityModel.add(link2.withRel("all-users"));
         return entityModel;
     }
 
@@ -245,13 +246,7 @@ public class EmployeeController {
 
     @GetMapping("/filtered-name/{id}")
     public ResponseEntity<MappingJacksonValue> filteredEmployees(@PathVariable Long id){
-        Employee employee = employeeService.getEmployeeById(id);
-        if(employee==null)
-            throw new UserNotFoundException("Employee not Found");
-        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(employee);
-        SimpleBeanPropertyFilter filter1 = SimpleBeanPropertyFilter.filterOutAllExcept("name");
-        FilterProvider filters = new SimpleFilterProvider().addFilter("filter1",filter1);
-        mappingJacksonValue.setFilters(filters);
+            MappingJacksonValue mappingJacksonValue = employeeService.getFilteredEmployees(id);
         return new ResponseEntity<>(mappingJacksonValue, HttpStatus.OK);
     }
 }

@@ -1,32 +1,21 @@
-package com.example.Restful_api_assignments.Entity;
+package com.example.Restful_api_assignments.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import io.swagger.v3.oas.annotations.media.Schema;
 
-//@JsonFilter("filter1")
-@Entity(name="Employee")
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@JsonFilter("filter1")
+public class EmployeeDTO {
+
+    @Schema(name = "Employee ID", example = "1")
     Long Id;
-
-    @Column(name = "name")
-    @NotBlank(message = "Name Cannot be blank")
+    @Schema(name = "Employee Name", example = "Aryan Kohli", required = true)
     String name;
-
-    @Column(name="age")
+    @Schema(name = "Employee Age", example = "21", required = true)
     Integer age;
-
-    @Column(name="password")
-//    @JsonIgnore
+    @Schema(name = "Employee Password", example = "P@ss#word12b@", required = true)
     String password;
 
-    public Employee(){}
+    public EmployeeDTO(){}
 
     public String getPassword() {
         return password;
@@ -36,7 +25,7 @@ public class Employee {
         this.password = password;
     }
 
-    public Employee(Long id, String name, Integer age, String password) {
+    public EmployeeDTO(Long id, String name, Integer age, String password) {
         Id = id;
         this.name = name;
         this.age = age;

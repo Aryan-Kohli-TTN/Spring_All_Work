@@ -5,10 +5,11 @@ import com.example.Restful_api_assignments.Entity.Employee_2;
 import com.example.Restful_api_assignments.Repository.EmployeeRepository_2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class EmployeeService_2 {
     @Autowired
     EmployeeRepository_2 employeeRepository_2;

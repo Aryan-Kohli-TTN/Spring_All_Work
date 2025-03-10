@@ -17,7 +17,7 @@ public class CommonJoinPointAspect {
     @Pointcut("bean(Dao*)")
     public void startsWithDao(){}
 
-    @Pointcut("within(* com.example.Spring_Aop.Data..*")
+    @Pointcut("within(com.example.Spring_Aop.Data..*)")
     public void dataWithinLayerExecution(){}
 
     @Pointcut("@annotation(com.example.Spring_Aop.Annotations.MyAnnotation)")

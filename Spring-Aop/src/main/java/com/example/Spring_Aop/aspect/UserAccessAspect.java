@@ -1,6 +1,7 @@
 package com.example.Spring_Aop.aspect;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ public class UserAccessAspect {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Before("execution(* com.example.Spring_Aop.Business.*.*(..))")
+//    @After("execution(* com.example.Spring_Aop.Business.*.*(..))")
 
     // others are not working
     // myAnnotation not working check with mentors
