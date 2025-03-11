@@ -23,11 +23,13 @@ public class AfterAspect {
 //    public void afterThrowing(JoinPoint jp,Object exception){
 //        logger.info("{} throws {}",jp,exception);
 //    }
-    @After(value="execution(* com.example.Spring_Aop.Business.*.*(..))")
-    //    @After("com.example.Spring_Aop.aspect.CommonJoinPointAspect.businessLayerExecution()")
+//    @After(value="execution(* com.example.Spring_Aop.Business.*.*(..))")
+        @After("com.example.Spring_Aop.aspect.CommonJoinPointAspect.businessLayerExecution()")
 
     public void after(JoinPoint jp){
-        logger.info("After called for {}",jp);
+//        logger.info("After called for {}",jp);
+//        System.out.println("After called for "+jp);
+        System.out.println("After");
     }
 //    @After("com.example.Spring_Aop.aspect.CommonJoinPointAspect.myAnnotationMethod()")
 //    public void after(JoinPoint jp){

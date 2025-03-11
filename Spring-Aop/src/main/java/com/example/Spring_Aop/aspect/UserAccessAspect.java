@@ -13,15 +13,16 @@ import org.springframework.context.annotation.Configuration;
 public class UserAccessAspect {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Before("execution(* com.example.Spring_Aop.Business.*.*(..))")
-//    @After("execution(* com.example.Spring_Aop.Business.*.*(..))")
+//    @Before("execution(* com.example.Spring_Aop.Business.*.*(..))")
 
     // others are not working
     // myAnnotation not working check with mentors
 //    @Before("execution(com.example.Spring_Aop.aspect.CommonJoinPointAspect.dataLayerExecution()")
     //    @Before("com.example.Spring_Aop.aspect.CommonJoinPointAspect.myAnnotationMethod()")
-//    @Before("com.example.Spring_Aop.aspect.CommonJoinPointAspect.businessLayerExecution()")
+   @Before("com.example.Spring_Aop.aspect.CommonJoinPointAspect.businessLayerExecution()")
     public void before(JoinPoint jp){
-            logger.info("called before {}",jp);
+//            logger.info("called before {}",jp);
+//        System.out.println("called before "+jp);
+        System.out.println("Before");
     }
 }

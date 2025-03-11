@@ -17,10 +17,14 @@ public class MethodExecutionCalculationAspect {
     @Around("execution(* com.example.Spring_Aop.Business.*.*(..))")
     public Object around(ProceedingJoinPoint jp) throws Throwable{
         long startTime = System.currentTimeMillis();
+//        logger.info("Start time taken");
+        System.out.println("AROUND Start");
         Object result = jp.proceed();
         long endTime = System.currentTimeMillis();
         long tt = endTime-startTime;
-        logger.info("timre taken by  {} is {}",jp,tt);
+//        logger.info("time taken by  {} is {}",jp,tt);
+        System.out.println("AROUND End");
+//        System.out.println("time taken by"+jp+" is"+tt);
         return result;
     }
 }
