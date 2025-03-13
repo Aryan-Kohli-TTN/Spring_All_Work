@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.CollectionId;
 
 //@JsonFilter("filter1")
 @Entity(name="Employee")
@@ -26,6 +27,9 @@ public class Employee {
 //    @JsonIgnore
     String password;
 
+    @Column(name="location")
+    String location;
+
     public Employee(){}
 
     public String getPassword() {
@@ -36,11 +40,12 @@ public class Employee {
         this.password = password;
     }
 
-    public Employee(Long id, String name, Integer age, String password) {
+    public Employee(Long id, String name, Integer age, String password,String location) {
         Id = id;
         this.name = name;
         this.age = age;
         this.password=password;
+        this.location=location;
     }
 
     public Long getId() {
@@ -67,6 +72,14 @@ public class Employee {
         this.age = age;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -74,6 +87,7 @@ public class Employee {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", password='" + password + '\'' +
+                ", location='" + location + '\'' +
                 '}';
     }
 }

@@ -9,6 +9,9 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -59,4 +62,23 @@ public class EmployeeService {
         return mappingJacksonValue;
     }
 
+
+    public Long countEmployee(){
+        return  employeeRepository.count();
+    }
+
+    public List<Employee> PageAndSortByAge(int pageNo, int pagesize){
+        return employeeRepository.findAll(PageRequest.of(pageNo,pagesize, Sort.by("age"))).getContent();
+    }
+
+    public List<Employee> findByName(String name){
+        return employeeRepository.findByName(name);
+    }
+    public List<Employee> findByNameStartWithA(String startswith){
+        return employeeRepository.findByNameStartsWith(startswith);
+    }
+
+    public List<Employee> findEmployeeBetweenAges(int min_age,int max_age){
+        return employeeRepository.findByAgeBetween(min_age,max_age);
+    }
 }

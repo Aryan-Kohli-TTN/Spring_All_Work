@@ -249,4 +249,34 @@ public class EmployeeController {
             MappingJacksonValue mappingJacksonValue = employeeService.getFilteredEmployees(id);
         return new ResponseEntity<>(mappingJacksonValue, HttpStatus.OK);
     }
+
+
+    // JPA 1 ASSIGNMENT CONTROLLERS
+    @GetMapping("/employees/count")
+    public ResponseEntity<Long> countEmployees(){
+        Long count = employeeService.countEmployee();
+        return new ResponseEntity<>(count,HttpStatus.OK);
+    }
+
+    @GetMapping("/employees/page")
+    public ResponseEntity<List<Employee>> pageAndAgeSort(@RequestParam int pageno, @RequestParam int pagesize){
+        List<Employee> employees=employeeService.PageAndSortByAge(pageno,pagesize);
+        return  new ResponseEntity<>(employees,HttpStatus.OK);
+    }
+    @GetMapping("/employees/name/{name}")
+    public ResponseEntity<List<Employee>> findByName(@PathVariable String name){
+        List<Employee> employees=employeeService.findByName(name);
+        return  new ResponseEntity<>(employees,HttpStatus.OK);
+    }
+    @GetMapping("/employees/starts/{startsWith}")
+    public ResponseEntity<List<Employee>> findByNameStartsWith(@PathVariable String startsWith){
+        List<Employee> employees=employeeService.findByNameStartWithA(startsWith);
+        return  new ResponseEntity<>(employees,HttpStatus.OK);
+    }
+    @GetMapping("/employees/ages/between")
+    public ResponseEntity<List<Employee>> findByAgeBetween(@RequestParam int min_age,@RequestParam int max_age)
+    {
+        List<Employee> employees = employeeService.findEmployeeBetweenAges(min_age,max_age);
+        return  new ResponseEntity<>(employees,HttpStatus.OK);
+    }
 }
