@@ -1,5 +1,8 @@
 package com.example.Restful_api_assignments;
 
+import com.example.JPA_2_ASSIGNMENT.question4.Employee_2;
+import com.example.JPA_2_ASSIGNMENT.question4.Employee_2_repository;
+import com.example.JPA_2_ASSIGNMENT.question4.SalaryDetails;
 import com.example.Restful_api_assignments.Entity.Employee;
 import com.example.Restful_api_assignments.Repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
@@ -17,6 +20,7 @@ class RestfulApiAssignmentsApplicationTests {
 
 	@Autowired
 	EmployeeRepository employeeRepository;
+
 	@Test
 	void contextLoads() {
 	}
@@ -82,5 +86,6 @@ class RestfulApiAssignmentsApplicationTests {
 		List<Employee> employees = employeeRepository.findByAgeBetween(28,32);
 		employees.forEach(System.out::println);
 	}
+
 
 }
