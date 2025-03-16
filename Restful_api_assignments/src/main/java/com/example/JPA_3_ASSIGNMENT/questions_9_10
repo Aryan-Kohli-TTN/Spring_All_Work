@@ -1,0 +1,9 @@
+answer 9:-session.evict(object);
+answer 10:-
+when i put @Transactional over a method it ensures  that either all operations succeed (commit) or
+ none are applied (rollback) if an error occurs.
+
+it is also used in doing first level cache..
+like when i am doing lazy fetching it is needed to put this annotaion so that it groups the transaction and the session
+will remain open and it does not close immediately after findById()..
+the first level caching is possible because everything happens in one session..
